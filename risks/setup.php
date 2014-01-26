@@ -10,7 +10,7 @@ $config['mod_directory']    = 'risks';              // tell web2project where to
 $config['mod_setup_class']  = 'CSetupRisks';        // the name of the PHP setup class (used below)
 $config['mod_type']         = 'user';               // 'core' for modules distributed with w2p by standard, 'user' for additional modules
 $config['mod_ui_name']      = $config['mod_name'];	// the name that is shown in the main menu of the User Interface
-$config['mod_ui_icon']      = '';
+$config['mod_ui_icon']      = 'scales.png';         // name of a related icon
 $config['mod_description']  = 'Risk management';    // some description of the module
 $config['mod_config']       = false;                // show 'configure' link in viewmods
 $config['mod_main_class']   = 'CRisk';
@@ -135,7 +135,7 @@ class CSetupRisks extends w2p_Core_Setup
 
     private function addColumns()
     {
-        $module = new w2p_Core_Module();
+        $module = new w2p_System_Module();
         $fieldList = array('risk_name', 'risk_priority', 'risk_task', 'risk_probability',
             'risk_impact', 'risk_owner', 'risk_status', 'risk_mitigation_date');
         $fieldNames = array('Name', 'Priority', 'Related Task', 'Probability',
