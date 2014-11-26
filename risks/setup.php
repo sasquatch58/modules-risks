@@ -5,7 +5,7 @@ if (!defined('W2P_BASE_DIR')){
 
 $config = array();
 $config['mod_name']         = 'Risks';              // name the module
-$config['mod_version']      = '2.0';                // add a version number
+$config['mod_version']      = '2.0.1';                // add a version number
 $config['mod_directory']    = 'risks';              // tell web2project where to find this module
 $config['mod_setup_class']  = 'CSetupRisks';        // the name of the PHP setup class (used below)
 $config['mod_type']         = 'user';               // 'core' for modules distributed with w2p by standard, 'user' for additional modules
@@ -21,14 +21,18 @@ $config['permissions_item_label'] = 'risk_name';
 
 $config['requirements'] = array(
     array('require' => 'web2project',   'comparator' => '>=', 'version' => '3'),
-    array('require' => 'php',   'comparator' => '>=', 'version' => '5.2'),
 );
 
 class CSetupRisks extends w2p_Core_Setup
 {
     public function install()
     {
-		$q = $this->_getQuery();
+    	$result = $this->_meetsRequirements();
+    	if (!$result) {
+    		return false;
+    	}
+    	 
+    	$q = $this->_getQuery();
 		$q->createTable('risks');
 		$sql = '(
             `risk_id` int(10) unsigned NOT NULL auto_increment,
